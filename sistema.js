@@ -13,6 +13,7 @@ var animal={
 var lista_especies_registradas=["cachorro","gato","passaro"]
 var chips_registrados=[]
 var pessoas_registro=[]
+var cpfs_cadastrados=[]
 var pessoa={
     nome: null,
     cpf: null,
@@ -45,7 +46,7 @@ function registro_animais(){
 
     // Area de cadastro do animal  
     animal.nome=String(prompt("Digite o nome do animal")) // Nome do animal vai ser registrado aqui 
-    animal.id=id_code // Id gerado automaticamente 
+    animal.id=id_code_animal // Id gerado automaticamente 
     animal.status="vivo" // Status de Vivo sera direcionado automatico 
     var especie=Number(prompt("Selecione a Especie \n 1-cachorro \n 2- gato \n 3- passaro \n 4-Outros ")) // menu de escolha de especie 
           switch(especie){
@@ -103,9 +104,42 @@ function registro_animais(){
     }
       
 function registro_pessoas(){
-
-
-
+    // Area de registro de pessoas 
+    var pessoa={
+        nome: null,
+        cpf: null,
+        id: null,
+        telefone: null,
+        localizacao:{
+            estado: null,
+            cidade: null,
+            rua: null,
+            cep: null,
+        },
+        animais_adotados:[],
+    }  
+    pessoa.id=id_code_pessoa
+    pessoa.nome=String(prompt("Informe seu nome: "))
+    pessoa.cpf=Number(prompt("Informe seu cpf sem pontos ou traços: "))
+        for(var i=0;i<cpfs_cadastrados.length;i++){  
+            if(pessoa.cpf===cpfs_cadastrados[i]){
+                alert("CPF ja cadastrado!")
+                return
+            }    
+        } 
+    pessoa.telefone=Number(prompt("Informe seu telefone com DDD: "))
+    pessoa.localizacao.estado=String(prompt("Informe seu estado: "))
+    pessoa.localizacao.cidade=String(prompt("Informe sua cidade: "))
+    pessoa.localizacao.rua=String(prompt("Informe sua rua: "))
+    pessoa.localizacao.cep=String(prompt("Informe seu cep: "))
+    id_code_pessoa=id_code_pessoa+1
+    pessoas_registro.push(pessoa)
+    console.log("-----------------------------------")
+    console.log("Registro efetuado com sucesso")
+    console.log("-----------------------------------")
+    console.log("Nome: "+pessoa.nome)
+    console.log("CPF: "+pessoa.cpf)
+    console.log("Estado: "+pessoa.localizacao.estado)
 }
 function lista_animais_disponiveis(){
     var cont_fichas=1
@@ -142,12 +176,11 @@ function lista_animais_disponiveis(){
     }   
 }
 
-
 function lista_animais_adotados(){
     var cont_fichas=1
          console.log(` 
              ╔═══════════════════════════════════════════════════════════════════╗
-             ║                       Animais Disponiveis                         ║
+             ║                        Animais Adotados                           ║
              ╚═══════════════════════════════════════════════════════════════════╝`)
     
      for(var i=0;i<animais_resgistros.length;i++){
@@ -178,7 +211,36 @@ function lista_animais_adotados(){
     }   
     }
 
-function lista_pessoas(){}
+function lista_pessoas(){
+
+    var cont_fichas=1
+    console.log(` 
+        ╔═══════════════════════════════════════════════════════════════════╗
+        ║                       Pessoas Registradas                         ║
+        ╚═══════════════════════════════════════════════════════════════════╝`)
+     for(var i=0;i<pessoas_registro.length;i++){
+        console.log("Ficha "+cont_fichas) 
+        console.log(`
+        ╔═══════════════════════════════════════════════════════════════════╗
+        ║`+"Nome: "+pessoas_registro[i].nome+                              `
+        ╠═══════════════════════════════════════════════════════════════════╣
+        ║`+"CPF: "+pessoas_registro[i].cpf+                                `
+        ╠═══════════════════════════════════════════════════════════════════╣
+        ║`+"Telefone: "+pessoas_registro[i].telefone+                      `
+        ╠═══════════════════════════════════════════════════════════════════╣
+        ║`+"Estado: "+pessoas_registro[i].localizacao.estado+              `
+        ╠═══════════════════════════════════════════════════════════════════╣
+        ║`+"Cidade: "+pessoas_registro[i].localizacao.cidade+              `
+        ╠═══════════════════════════════════════════════════════════════════╣
+        ║`+"Rua: "+pessoas_registro[i].localizacao.rua+                    `
+        ╠═══════════════════════════════════════════════════════════════════╣
+        ║`+"CEP: "+pessoas_registro[i].localizacao.cep+                    `
+        ╠═══════════════════════════════════════════════════════════════════╣         
+        ╚═══════════════════════════════════════════════════════════════════╝`)
+        cont_fichas++
+        }
+    }
+
 function buscar_animal(){
     var aux=Number(prompt("Selecione o modo de buscar:\n 1-Por nome \n 2-por chip \n 3- por id"))
     var buscar
@@ -330,16 +392,16 @@ function menu_inicial(){
                 registro_animais();
                 break;
             case 2:
-                lista_animais_disponiveis()
+                registro_pessoas();
                 break;
             case 3:
-                lista_animais_adotados()
+                lista_animais_adotados();
                 break;
             case 4:
-                remover_animais()
+                remover_animais();
                 break;
             case 5:
-                buscar_animal()
+                lista_pessoas();
                 break;
             
         }
