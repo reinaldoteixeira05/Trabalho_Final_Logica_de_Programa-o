@@ -1,4 +1,4 @@
-var animais_resgistros=[]
+// objetos
 var animal={
     nome: null ,
     chip: null ,
@@ -10,10 +10,6 @@ var animal={
     idade: null,
     peso: null,
 }
-var lista_especies_registradas=["cachorro","gato","passaro"]
-var chips_registrados=[]
-var pessoas_registro=[]
-var cpfs_cadastrados=[]
 var pessoa={
     nome: null,
     cpf: null,
@@ -24,11 +20,18 @@ var pessoa={
         rua: null,
         cep: null,
     },
-    animais_adotados:[],
+    animaisAdotados:[],
+    situação: null,
 }
-var id_code_animal=1 // contadores de ID 
+// arrays 
+var chips_registrados=[]
+var pessoas_registro=[]
+var cpfs_cadastrados=[]
+var animais_resgistros=[]
+// contadores de ID 
+var id_code_animal=1 
 var id_code_pessoa=1 
-
+// funções de registo
 function registro_animais(){
     var animal={
         nome: null ,
@@ -96,13 +99,12 @@ function registro_animais(){
      animal.sexo=genero 
      animal.situacao="disponivel"
      animais_resgistros.push(animal)
-     id_code=id_code_animal+1
+     id_code_animal=id_code_animal+1
      console.log("---------------------------------------------")
      console.log("O animal: "+animal.nome+" foi registrado com sucesso !")
      console.log("---------------------------------------------")
      console.log("Nome: "+animal.nome+"\n"+"Chip: "+animal.chip+"\n"+"Status: Vivo "+"\n"+"Especie: "+animal.especie+"\n"+"Genero: "+animal.sexo)
-    }
-      
+}    
 function registro_pessoas(){
     // Area de registro de pessoas 
     var pessoa={
@@ -116,7 +118,8 @@ function registro_pessoas(){
             rua: null,
             cep: null,
         },
-        animais_adotados:[],
+        animaisAdotados:[],
+        situacao: null,
     }  
     pessoa.id=id_code_pessoa
     pessoa.nome=String(prompt("Informe seu nome: "))
@@ -132,6 +135,7 @@ function registro_pessoas(){
     pessoa.localizacao.cidade=String(prompt("Informe sua cidade: "))
     pessoa.localizacao.rua=String(prompt("Informe sua rua: "))
     pessoa.localizacao.cep=String(prompt("Informe seu cep: "))
+    pessoa.situacao="não adotante"
     id_code_pessoa=id_code_pessoa+1
     pessoas_registro.push(pessoa)
     console.log("-----------------------------------")
@@ -141,12 +145,13 @@ function registro_pessoas(){
     console.log("CPF: "+pessoa.cpf)
     console.log("Estado: "+pessoa.localizacao.estado)
 }
+// funções de listagem 
 function lista_animais_disponiveis(){
     var cont_fichas=1
-              console.log(` 
-                  ╔═══════════════════════════════════════════════════════════════════╗
-                  ║                       Animais Disponiveis                         ║
-                  ╚═══════════════════════════════════════════════════════════════════╝`)
+         console.log(` 
+             ╔═══════════════════════════════════════════════════════════════════╗
+             ║                       Animais Disponiveis                         ║
+             ╚═══════════════════════════════════════════════════════════════════╝`)
      for(var i=0;i<animais_resgistros.length;i++){
          if(animais_resgistros[i].situacao==="disponivel"){
             console.log("Ficha "+cont_fichas) 
@@ -175,7 +180,6 @@ function lista_animais_disponiveis(){
         
     }   
 }
-
 function lista_animais_adotados(){
     var cont_fichas=1
          console.log(` 
@@ -209,8 +213,7 @@ function lista_animais_adotados(){
              cont_fichas++
         }    
     }   
-    }
-
+}
 function lista_pessoas(){
 
     var cont_fichas=1
@@ -239,10 +242,10 @@ function lista_pessoas(){
         ╚═══════════════════════════════════════════════════════════════════╝`)
         cont_fichas++
         }
-    }
-
+}
+// funções de buscas
 function buscar_animal(){
-    var aux=Number(prompt("Selecione o modo de buscar:\n 1-Por nome \n 2-por chip \n 3- por id"))
+    var aux=Number(prompt("Selecione o modo de buscar:\n 1-Por nome \n 2-por chip "))
     var buscar
         switch(aux){
             case 1:
@@ -286,7 +289,7 @@ function buscar_por_nome(){
                
               encontrado = true;
           }if (!encontrado && i === animais_resgistros.length - 1) {
-          console.log("Animal nao encontrado");
+          console.log("Ficha não encontrada");
           
       }
   }
@@ -318,20 +321,140 @@ function buscar_por_chip(){
         ╚═══════════════════════════════════════════════════════════════════╝`)
               encontrado = true;
             }if (!encontrado && i === animais_resgistros.length - 1) {
-              console.log("Animal nao encontrado");   
+              console.log("Ficha não encontrada");   
             }
         }
     }
 }
+function busca_pessoa(){
 
 
-function busca_pessoa(){}
+
+
+}
+// função de adoção 
+function adotar_animal(){
+    lista_animais_disponiveis();
+    var encontrado_cpf=false
+    var encontrado_id=false
+    var aux_1=null
+    var aux_2=null
+    var busca_cpf=Number(prompt("Digite seu CPF"))
+    for(var i=0;i<pessoas_registro.length;i++){
+        if(busca_cpf===pessoas_registro[i].cpf){
+        console.log("Pessoa localizada \n"+"Nome: "+pessoas_registro[i].nome+"\n"+"CPF: "+pessoas_registro[i].cpf)
+        encontrado_cpf=true
+        }
+        aux_1=i
+        if(!encontrado_cpf && i===pessoas_registro.length-1){
+            alert("Ficha não encontrada, por favor se cadastre antes")
+            return
+    } 
+         }
+
+    var buscar_animal_id=Number(prompt("Digite o id do animal"))
+    for(var j=0;j<animais_resgistros.length;j++){
+        if(buscar_animal_id===animais_resgistros[j].id && animais_resgistros[j].situacao==="disponivel"){
+            console.log("Animal  encontrado \n "+"Nome:"+animais_resgistros[j].nome+"\n"+"Chip: "+animais_resgistros[j].chip)
+            encontrado_id=true
+            
+        }
+        aux_2=j
+        if(!encontrado_id && j=== animais_resgistros.length-1){
+            alert("Animal não encontrado ou não disponivel ")
+            return
+        }
+    }
+    var adocao=Number(prompt("Desejar adotar este animal? \n 1- Sim \n 2-Não"))
+        switch(adocao){
+            case 1:
+                console.log(aux_1,aux_2)
+                pessoas_registro[aux_1].animaisAdotados.push(animais_resgistros[aux_2])
+                animais_resgistros[aux_2].situacao="adotado"
+                pessoas_registro[aux_1].situacao="adotante"
+                console.log("Adoção realizada com sucesso") 
+                break;
+            case 2:
+                break;
+            default:
+                alert("opção invalida por favor refaça o processo")
+                break;
+
+        }
+
+
+
+
+}
+// funções de edição
 function remover_animais(){
     var buscar_animal=Number(prompt("digite o Id do animal a ser removido"))
     var encontrado= false
-    var aux_2=  null
     for (var i = 0; i < animais_resgistros.length; i++) {
-        if (buscar_animal === animais_resgistros[i].id) {
+        if(buscar_animal === animais_resgistros[i].id && animais_resgistros[i].status === "morto"){
+            alert("Este animal não pode ser removido pois seu status esta como (morto) ")
+            return
+        }
+        if( buscar_animal === animais_resgistros[i].id && animais_resgistros[i].situacao==="adotado"){
+            alert("Este animal não pode ser removido pois se status esta como (adotado) ")
+            return
+        }
+        if (buscar_animal === animais_resgistros[i].id ) {
+            console.log(`
+            ╔═══════════════════════════════════════════════════════════════════╗
+            ║`+"Nome: "+animais_resgistros[i].nome+                            `
+            ╠═══════════════════════════════════════════════════════════════════╣
+            ║`+"Idade: "+animais_resgistros[i].idade+                          `
+            ╠═══════════════════════════════════════════════════════════════════╣
+            ║`+"Chip: "+animais_resgistros[i].chip+                            `
+            ╠═══════════════════════════════════════════════════════════════════╣
+            ║`+"Peso: "+animais_resgistros[i].peso+                            `
+            ╠═══════════════════════════════════════════════════════════════════╣
+            ║`+"Id: "+animais_resgistros[i].id+                                `
+            ╠═══════════════════════════════════════════════════════════════════╣
+            ║`+"Especie: "+animais_resgistros[i].especie+                      `
+            ╠═══════════════════════════════════════════════════════════════════╣
+            ║`+"Sexo: "+animais_resgistros[i].sexo+                            `
+            ╠═══════════════════════════════════════════════════════════════════╣
+            ║`+"Status: "+animais_resgistros[i].status+                        `
+            ╠═══════════════════════════════════════════════════════════════════╣
+            ║`+"Situação: "+animais_resgistros[i].situacao+                    `
+            ╚═══════════════════════════════════════════════════════════════════╝`)          
+             var aux=Number(prompt("Deseja remover esse animal? \n 1- Sim \n 2-Não"))
+               switch(aux){
+                  case 1:
+                        animais_resgistros[i].id += +animais_resgistros.length // essa função ira somar o id do animal + o tamanho da lista
+                        animais_resgistros.sort(function(a,b){    // metodo sort ira colocar o animal selecionado no final do array
+                            if(a.id<b.id){
+                                return -1;
+                            }
+                            else{
+                                return true;
+                            }
+                        })
+                        animais_resgistros.pop()  // função pop para remover o ultimo elemento do array
+                        console.log("Animal Removido com sucesso")
+                        break;
+                    case 2:
+                        break;
+                    default: 
+                    alert("opção invalida!")
+                }
+
+            } 
+            encontrado = true;
+        }if (!encontrado && i === animais_resgistros.length - 1) {
+        console.log("Ficha não encontrada");
+    }
+    
+}
+function remover_pessoa(){}
+
+function edicao_status_animal_disponivel(){
+    var buscar_animal=Number(prompt("digite o Id do animal a ser editado"))
+    var encontrado= false
+    for (var i = 0; i < animais_resgistros.length; i++) {
+        if (buscar_animal === animais_resgistros[i].id ) {
             console.log(`
             ╔═══════════════════════════════════════════════════════════════════╗
             ║`+"Nome: "+animais_resgistros[i].nome+                            `
@@ -352,33 +475,21 @@ function remover_animais(){
             ╠═══════════════════════════════════════════════════════════════════╣
             ║`+"Situação: "+animais_resgistros[i].situacao+                    `
             ╚═══════════════════════════════════════════════════════════════════╝`) 
-            } 
+
+            animais_resgistros[i].status="morto"
+            console.log("o status do animal "+animais_resgistros[i].nome+" foi mudado para "+animais_resgistros[i].status)
             encontrado = true;
-            aux_2 = i 
-        }if (!encontrado && i === animais_resgistros.length - 1) {
-        console.log("Animal nao encontrado");
-    }
-    var aux=Number(prompt("Deseja remover esse animal? \n 1- Sim \n 2-Não"))
-    switch(aux){
-        case 1:
-            animais_resgistros[aux_2-1].id += +animais_resgistros.length
-            animais_resgistros.sort(function(a,b){
-                if(a.id<b.id){
-                    return -1;
-                }
-                else{
-                    return true;
-                }
-            })
-            animais_resgistros.pop()
-            break;
-        case 2:
-            break;
-        default: 
-        alert("opção invalida!")
-    }
+            }
+          if (!encontrado && i === animais_resgistros.length - 1) {
+            console.log("Ficha não encontrada");
+    }  
+            
+        }
+
+        
+
 }
-   
+// menus 
 function menu_inicial(){
     do{
     var opcao=Number(prompt(` 
@@ -386,28 +497,102 @@ function menu_inicial(){
                 Menu Incial         
     ╚══════════════════════╝ 
     `
-    +"\n 1-cadastrar animal \n 2-cadastrar pessoa \n 3-Listar animais Adotados \n 4-Remover Animais \n 5-Buscar Animal "))
+    +"\n 1- Menu de Registros \n 2- Menu de Listas \n 3- Menu de Busca \n 4- Menu de Edição \n 5- Menu de Adoção \n 6-Sair "))
         switch(opcao){
             case 1:
-                registro_animais();
+                var menu_registro=Number(prompt("Menu de registro \n 1-Registrar Animal \n 2-Registrar Pessoa \n 3-Sair"))
+                    switch(menu_registro){
+                        case 1:
+                            registro_animais();
+                            break;
+                        case 2:
+                            registro_pessoas();
+                            break;
+                        case 3:
+                            break;
+                        default:
+                            alert("Opção invalida")
+                            break;
+                    }
                 break;
             case 2:
-                registro_pessoas();
+                var menu_listas=Number(prompt("Menu de Listas \n 1-Lista animais disponiveis \n 2-Lista animais adotados \n 3-Lista Pessoas \n 4-sair"))
+                    switch(menu_listas){
+                        case 1:
+                            lista_animais_disponiveis();
+                            break;
+                        case 2:
+                            lista_animais_adotados();
+                            break;
+                        case 3:
+                            lista_pessoas();
+                            break;
+                        case 4:
+                            break;
+                        default:
+                            alert("opção invalida")
+                            break;
+                            
+
+
+                    }
+
+                
                 break;
             case 3:
-                lista_animais_adotados();
+                var menu_busca=Number(prompt("Menu de Busca \n 1-Buscar animal \n 2-Buscar pesso \n 3- sair"))
+                    switch(menu_busca){
+                        case 1:
+                            buscar_animal();
+                            break;
+                        case 2:
+                            busca_pessoa();
+                            break;
+                        case 3:
+                            break;
+                        default:
+                            alert("opção invalida")
+
+
+
+                    }
                 break;
             case 4:
-                remover_animais();
+                var menu_edicao=Number(prompt("Menu de Edições \n 1-Remover animal \n 2- Remover pesso \n 3-Editar status de animal \n 4-sair"))
+                    switch(menu_edicao){
+                        case 1:
+                            remover_animais();
+                            break;
+                        case 2:
+                            remover_pessoa();
+                        case 3:
+                            edicao_status_animal_disponivel();
+                            break;
+                        case 4:
+                            break;
+                        default:
+                            alert("Opção invalida")
+
+                    }
                 break;
             case 5:
-                lista_pessoas();
+                var menu_adocao=Number(prompt("Menu de Adoção \n Deseja adotar um animal? \n 1-Sim \n 2-Não"))
+                    switch(menu_adocao){
+                        case 1:
+                            adotar_animal();
+                            break;
+                        case 2:
+                            break;
+                        default:
+                            alert("Opção invalida")
+                            break;
+                    }
                 break;
             
         }
 
     }
-    while(opcao!=10)
+    while(opcao!=6)
 }
 menu_inicial()
 
