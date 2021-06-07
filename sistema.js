@@ -47,7 +47,6 @@ function registro_animais(){
 
         
     } 
-
     // Area de cadastro do animal  
     animal.nome=String(prompt("Digite o nome do animal")) // Nome do animal vai ser registrado aqui 
     animal.id=id_code_animal // Id gerado automaticamente 
@@ -92,7 +91,6 @@ function registro_animais(){
         }
        
     } 
-
      chips_registrados.push(animal.chip)   // Array com os chips ja registrados 
      animal.idade=Number(prompt("Digite a Idade do(a) "+animal.nome)) // 
      animal.peso=Number(prompt("Digite o peso do(a) "+animal.nome)) 
@@ -217,7 +215,6 @@ function lista_animais_adotados(){
     }   
 }
 function lista_pessoas(){
-
     var cont_fichas=1
     console.log(` 
         ╔═══════════════════════════════════════════════════════════════════╗
@@ -330,6 +327,7 @@ function buscar_por_chip(){
     }
 }
 function busca_pessoa(){
+
 function busca_cpf(){
     var encontrado=false
     var buscar=Number(prompt("Digite o numero do CPF: "))
@@ -622,14 +620,10 @@ function remover_pessoa(){
                 default:
                     alert("opção invalida")
             
-    
                 }
              
-        } 
-        
-
+        }        
 }
-
 function edicao_status_animal_disponivel(){
     var buscar_animal=Number(prompt("digite o Id do animal a ser editado"))
     var encontrado= false
@@ -696,7 +690,7 @@ function menu_inicial(){
                     }
                 break;
             case 2:
-                var menu_listas=Number(prompt("Menu de Listas \n 1-Lista animais disponiveis \n 2-Lista animais adotados \n 3-Lista Pessoas \n 4-sair"))
+                var menu_listas=Number(prompt("Menu de Listas \n 1- Lista animais disponiveis \n 2- Lista animais adotados \n 3- Lista Pessoas \n 4- Sair"))
                     switch(menu_listas){
                         case 1:
                             lista_animais_disponiveis();
