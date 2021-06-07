@@ -326,7 +326,7 @@ function buscar_por_chip(){
         }
     }
 }
-function busca_pessoa(){
+function buscar_pessoa(){
 
 function busca_cpf(){
     var encontrado=false
@@ -720,7 +720,7 @@ function menu_inicial(){
                             buscar_animal();
                             break;
                         case 2:
-                            busca_pessoa();
+                            buscar_pessoa();
                             break;
                         case 3:
                             break;
