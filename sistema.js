@@ -51,7 +51,7 @@ function registro_animais(){
     animal.nome=String(prompt("Digite o nome do animal")) // Nome do animal vai ser registrado aqui 
     animal.id=id_code_animal // Id gerado automaticamente 
     animal.status="vivo" // Status de Vivo sera direcionado automatico 
-    var especie=Number(prompt("Selecione a Especie \n 1-cachorro \n 2- gato \n 3- passaro \n 4-Outros ")) // menu de escolha de especie 
+    var especie=Number(prompt("Selecione a Especie \n 1- cachorro \n 2- gato \n 3- passaro \n 4- Outros ")) // menu de escolha de especie 
           switch(especie){
                 case 1:
                   especie="cachorro"
@@ -70,7 +70,7 @@ function registro_animais(){
                   alert("opção invalida !!")
                   return
            }
-    var genero=Number(prompt("Selecione o genero \n 1-Femea \n 2-Macho")) // menu de escolha de genero 
+    var genero=Number(prompt("Selecione o genero \n 1- Femea \n 2- Macho")) // menu de escolha de genero 
             switch(genero){
                 case 1:
                     genero="Femea"
@@ -122,8 +122,8 @@ function registro_pessoas(){
     }  
     pessoa.id=id_code_pessoa
     pessoa.nome=String(prompt("Informe seu nome: "))
-    pessoa.cpf=Number(prompt("Informe seu cpf sem pontos ou traços: "))
-        for(var i=0;i<cpfs_cadastrados.length;i++){  
+    pessoa.cpf=String(prompt("Informe seu cpf sem pontos ou traços: "))
+        for(var i=0;i<cpfs_cadastrados.length;i++){      // teste para verificar se o cpf ja esta registrado
             if(pessoa.cpf===cpfs_cadastrados[i]){
                 alert("CPF ja cadastrado!")
                 return
@@ -237,7 +237,8 @@ function lista_pessoas(){
         ║`+"Rua: "+pessoas_registro[i].localizacao.rua+                    `
         ╠═══════════════════════════════════════════════════════════════════╣
         ║`+"CEP: "+pessoas_registro[i].localizacao.cep+                    `
-        ╠═══════════════════════════════════════════════════════════════════╣         
+        ╠═══════════════════════════════════════════════════════════════════╣
+        ║`+"Id: "+pessoas_registro[i].id+                                  `
         ╚═══════════════════════════════════════════════════════════════════╝`)
         cont_fichas++
         }
@@ -330,7 +331,7 @@ function buscar_pessoa(){
 
 function busca_cpf(){
     var encontrado=false
-    var buscar=Number(prompt("Digite o numero do CPF: "))
+    var buscar=String(prompt("Digite o numero do CPF: "))
         for(var i=0; i<pessoas_registro.length;i++){
             if(buscar===pessoas_registro[i].cpf){
                 console.log(` 
@@ -358,7 +359,7 @@ function busca_cpf(){
 
             }
             if(!encontrado && i===pessoas_registro.length-1){
-                alert("Ficha não encontrada")
+                console.log("Ficha não encontrada")
             }
         }
 
@@ -394,7 +395,7 @@ function busca_nome(){
 
             }
             if(!encontrado && i===pessoas_registro.length-1){
-                alert("Ficha não encontrada")
+                console.log("Ficha não encontrada")
             }
         }
 
@@ -428,7 +429,7 @@ function adotar_animal(){
     var encontrado_id=false
     var aux_1=null // variaveis auxiliares para guardar o valor de i e j
     var aux_2=null
-    var busca_cpf=Number(prompt("Digite seu CPF"))
+    var busca_cpf=String(prompt("Digite seu CPF"))
     for(var i=0;i<pessoas_registro.length;i++){
         if(busca_cpf===pessoas_registro[i].cpf){
         console.log("Pessoa localizada \n"+"Nome: "+pessoas_registro[i].nome+"\n"+"CPF: "+pessoas_registro[i].cpf)
@@ -562,13 +563,9 @@ function remover_animais(){
 }
 function remover_pessoa(){
  var encontrado=false
-    var buscar=Number(prompt("Digite o numero do CPF: "))
+    var buscar=Number(prompt("Digite o numero do ID: "))
         for(var i=0; i<pessoas_registro.length;i++){
                 if(buscar===pessoas_registro[i].id){
-                    console.log(` 
-                    ╔═══════════════════════════════════════════════════════════════════╗
-                    ║                       Pessoaa Encontrada                          ║
-                    ╚═══════════════════════════════════════════════════════════════════╝`)
                     console.log(`
                     ╔═══════════════════════════════════════════════════════════════════╗
                     ║`+"Nome: "+pessoas_registro[i].nome+                              `
@@ -584,7 +581,8 @@ function remover_pessoa(){
                     ║`+"Rua: "+pessoas_registro[i].localizacao.rua+                    `
                     ╠═══════════════════════════════════════════════════════════════════╣
                     ║`+"CEP: "+pessoas_registro[i].localizacao.cep+                    `
-                    ╠═══════════════════════════════════════════════════════════════════╣         
+                    ╠═══════════════════════════════════════════════════════════════════╣
+                    ║`+"Id: "+pessoas_registro[i].id+                                  `
                     ╚═══════════════════════════════════════════════════════════════════╝`)
                     encontrado=true
                         
@@ -705,13 +703,8 @@ function menu_inicial(){
                             break;
                         default:
                             alert("opção invalida")
-                            break;
-                            
-
-
-                    }
-
-                
+                            break;                            
+                    }           
                 break;
             case 3:
                 var menu_busca=Number(prompt("Menu de Pesquisa \n 1- Pesquisar animal \n 2- Pesquisar pessoa \n 3- Sair"))
@@ -726,9 +719,6 @@ function menu_inicial(){
                             break;
                         default:
                             alert("opção invalida")
-
-
-
                     }
                 break;
             case 4:
@@ -747,7 +737,6 @@ function menu_inicial(){
                             break;
                         default:
                             alert("Opção invalida")
-
                     }
                 break;
             case 5:
@@ -762,12 +751,9 @@ function menu_inicial(){
                             alert("Opção invalida")
                             break;
                     }
-                break;
-            
+                break;          
         }
-
     }
     while(opcao!=6)
 }
 menu_inicial()
-
