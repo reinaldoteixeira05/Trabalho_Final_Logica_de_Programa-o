@@ -43,10 +43,9 @@ function registro_animais(){
         sexo: null,
         situacao: null,
         idade: null,
-        peso: null,
-
-        
+        peso: null,       
     } 
+    
     // Area de cadastro do animal  
     animal.nome=String(prompt("Digite o nome do animal")) // Nome do animal vai ser registrado aqui 
     animal.id=id_code_animal // Id gerado automaticamente 
@@ -88,8 +87,7 @@ function registro_animais(){
         if(animal.chip===chips_registrados[i]){
             alert("Chip ja foi registrado!")
             return
-        }
-       
+        }      
     } 
      chips_registrados.push(animal.chip)   // Array com os chips ja registrados 
      animal.idade=Number(prompt("Digite a Idade do(a) "+animal.nome)) // 
@@ -241,7 +239,7 @@ function lista_pessoas(){
         ║`+"Id: "+pessoas_registro[i].id+                                  `
         ╚═══════════════════════════════════════════════════════════════════╝`)
         cont_fichas++
-        }
+    }
 }
 // funções de buscas
 function buscar_animal(){
@@ -286,14 +284,12 @@ function buscar_por_nome(){
         ║`+"Status: "+animais_resgistros[i].status+                        `
         ╠═══════════════════════════════════════════════════════════════════╣
         ║`+"Situação: "+animais_resgistros[i].situacao+                    `
-        ╚═══════════════════════════════════════════════════════════════════╝`) 
-               
+        ╚═══════════════════════════════════════════════════════════════════╝`)                
               encontrado = true;
           }if (!encontrado && i === animais_resgistros.length - 1) {
-          console.log("Ficha não encontrada");
-          
-      }
-  }
+          console.log("Ficha não encontrada");         
+        }
+    }
 }
 function buscar_por_chip(){
     var encontrado= false
@@ -362,8 +358,6 @@ function busca_cpf(){
                 console.log("Ficha não encontrada")
             }
         }
-
-
 }
 function busca_nome(){
     var encontrado=false
@@ -398,13 +392,6 @@ function busca_nome(){
                 console.log("Ficha não encontrada")
             }
         }
-
-
-
-
-
-
-
 }
 var aux=Number(prompt("Selecione o modo de pesquisa: \n 1- Por nome \n 2- Por CPF \n 3- Sair"))
     switch(aux){
@@ -417,10 +404,8 @@ var aux=Number(prompt("Selecione o modo de pesquisa: \n 1- Por nome \n 2- Por CP
         case 3:
             break;
         default:
-            alert("Opção Invalida")
-        
+            alert("Opção Invalida") 
     }
-
 }
 // função de adoção 
 function adotar_animal(){
@@ -439,15 +424,14 @@ function adotar_animal(){
         if(!encontrado_cpf && i===pessoas_registro.length-1){
             alert("Ficha não encontrada, por favor se cadastre antes")
             return
-    } 
-         }
+        } 
+    }
 
     var buscar_animal_id=Number(prompt("Digite o id do animal"))
     for(var j=0;j<animais_resgistros.length;j++){
         if(buscar_animal_id===animais_resgistros[j].id && animais_resgistros[j].situacao==="disponivel"){
             console.log("Animal encontrado \n "+"Nome:"+animais_resgistros[j].nome+"\n"+"Chip: "+animais_resgistros[j].chip)
-            encontrado_id=true
-            
+            encontrado_id=true           
         }
         aux_2=j
         if(!encontrado_id && j=== animais_resgistros.length-1){
@@ -484,20 +468,13 @@ function adotar_animal(){
         ╠═══════════════════════════════════════════════════════════════════╣
         ╠`+"Animal adotado: "+animais_resgistros[aux_2].nome+               `        
         ╚═══════════════════════════════════════════════════════════════════╝`)
-
-
                 break;
             case 2:
                 break;
             default:
                 alert("opção invalida por favor refaça o processo")
                 break;
-
         }
-
-
-
-
 }
 // funções de edição
 function remover_animais(){
@@ -553,13 +530,11 @@ function remover_animais(){
                     default: 
                     alert("opção invalida!")
                 }
-
             } 
             encontrado = true;
         }if (!encontrado && i === animais_resgistros.length - 1) {
         console.log("Ficha não encontrada");
-    }
-    
+    }   
 }
 function remover_pessoa(){
  var encontrado=false
@@ -617,9 +592,7 @@ function remover_pessoa(){
                     break;
                 default:
                     alert("opção invalida")
-            
-                }
-             
+                }       
         }        
 }
 function edicao_status_animal_disponivel(){
@@ -654,12 +627,8 @@ function edicao_status_animal_disponivel(){
             }
           if (!encontrado && i === animais_resgistros.length - 1) {
             console.log("Ficha não encontrada");
-    }  
-            
-        }
-
-        
-
+            }             
+    }     
 }
 // menus 
 function menu_inicial(){
