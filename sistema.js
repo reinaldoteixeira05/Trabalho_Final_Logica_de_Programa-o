@@ -282,7 +282,11 @@ function buscar_por_nome(){
     }
     for (var i = 0; i < animais_resgistros.length; i++) {
           if (buscar === animais_resgistros[i].nome) {
-    console.log("################ Animal encontrado ################ ")
+           console.log(` 
+        ╔═══════════════════════════════════════════════════════════════════╗
+        ║                       Animal Encontrado                           ║
+        ╚═══════════════════════════════════════════════════════════════════╝`)
+
               console.log(`
         ╔═══════════════════════════════════════════════════════════════════╗
         ║`+"Nome: "+animais_resgistros[i].nome+                            `
@@ -316,7 +320,11 @@ function buscar_por_chip(){
     }
     for (var i = 0; i < animais_resgistros.length; i++) {
           if (buscar === animais_resgistros[i].chip) {
-    console.log("################ Animal encontrado ################ ")
+        console.log(` 
+        ╔═══════════════════════════════════════════════════════════════════╗
+        ║                       Animal Encontrado                           ║
+        ╚═══════════════════════════════════════════════════════════════════╝`)
+
               console.log(`
         ╔═══════════════════════════════════════════════════════════════════╗
         ║`+"Nome: "+animais_resgistros[i].nome+                            `
@@ -356,7 +364,7 @@ function busca_cpf(){
             if(buscar===pessoas_registro[i].cpf){
                 console.log(` 
                 ╔═══════════════════════════════════════════════════════════════════╗
-                ║                       Pessoaa Encontrada                          ║
+                ║                        Pessoa Encontrada                          ║
                 ╚═══════════════════════════════════════════════════════════════════╝`)
                 console.log(`
                 ╔═══════════════════════════════════════════════════════════════════╗
