@@ -9,6 +9,7 @@ var animal={
     situacao: null,
     idade: null,
     peso: null,
+    dono: null,
 }
 var pessoa={
     nome: null,
@@ -43,7 +44,8 @@ function registro_animais(){
         sexo: null,
         situacao: null,
         idade: null,
-        peso: null,       
+        peso: null,
+        dono: null,       
     } 
     
     // Area de cadastro do animal  
@@ -82,7 +84,7 @@ function registro_animais(){
                     return
             }
  
-    animal.chip=String(prompt("Digite o chip de "+animal.nome))                                                                   // Codigo do chip vai ser registrado aqui
+    animal.chip=String(prompt("Digite o chip de "+animal.nome))// Codigo do chip vai ser registrado aqui
     for(var i=0;i<chips_registrados.length;i++){  
         if(animal.chip===chips_registrados[i]){
             alert("Chip ja foi registrado!")
@@ -146,6 +148,10 @@ function registro_pessoas(){
 // funções de listagem 
 function lista_animais_disponiveis(){
     var cont_fichas=1
+    if(animais_resgistros.length==0){
+        console.log("Não existem animais disponiveis")
+        return
+    }
          console.log(` 
              ╔═══════════════════════════════════════════════════════════════════╗
              ║                       Animais Disponiveis                         ║
@@ -174,12 +180,15 @@ function lista_animais_disponiveis(){
              ║`+"Situação: "+animais_resgistros[i].situacao+                    `
              ╚═══════════════════════════════════════════════════════════════════╝`)
              cont_fichas++
-        }    
-        
+        }       
     }   
 }
 function lista_animais_adotados(){
     var cont_fichas=1
+    if(animais_resgistros.length==0){
+        console.log("Não existem animais adotados")
+        return
+    }
          console.log(` 
              ╔═══════════════════════════════════════════════════════════════════╗
              ║                        Animais Adotados                           ║
@@ -207,6 +216,8 @@ function lista_animais_adotados(){
              ║`+"Status: "+animais_resgistros[i].status+                        `
              ╠═══════════════════════════════════════════════════════════════════╣
              ║`+"Situação: "+animais_resgistros[i].situacao+                    `
+             ╠═══════════════════════════════════════════════════════════════════╣
+             ║`+"Dono: " +animais_resgistros[i].dono+                            `
              ╚═══════════════════════════════════════════════════════════════════╝`)
              cont_fichas++
         }    
@@ -214,6 +225,10 @@ function lista_animais_adotados(){
 }
 function lista_pessoas(){
     var cont_fichas=1
+    if(pessoas_registro.length==0){
+        console.log("Não existem pessoas cadastradas")
+        return
+    }
     console.log(` 
         ╔═══════════════════════════════════════════════════════════════════╗
         ║                       Pessoas Registradas                         ║
@@ -262,6 +277,9 @@ function buscar_animal(){
         }
 function buscar_por_nome(){
     var encontrado= false
+    if(animais_resgistros.length==0){
+        console.log("Ficha inexistente")
+    }
     for (var i = 0; i < animais_resgistros.length; i++) {
           if (buscar === animais_resgistros[i].nome) {
     console.log("################ Animal encontrado ################ ")
@@ -287,12 +305,15 @@ function buscar_por_nome(){
         ╚═══════════════════════════════════════════════════════════════════╝`)                
               encontrado = true;
           }if (!encontrado && i === animais_resgistros.length - 1) {
-          console.log("Ficha não encontrada");         
+          console.log("Ficha inexistente");         
         }
     }
 }
 function buscar_por_chip(){
     var encontrado= false
+    if(animais_resgistros.length==0){
+        console.log("Ficha inexistente")
+    }
     for (var i = 0; i < animais_resgistros.length; i++) {
           if (buscar === animais_resgistros[i].chip) {
     console.log("################ Animal encontrado ################ ")
@@ -318,7 +339,7 @@ function buscar_por_chip(){
         ╚═══════════════════════════════════════════════════════════════════╝`)
               encontrado = true;
             }if (!encontrado && i === animais_resgistros.length - 1) {
-              console.log("Ficha não encontrada");   
+              console.log("Ficha inexistente");   
             }
         }
     }
@@ -328,6 +349,9 @@ function buscar_pessoa(){
 function busca_cpf(){
     var encontrado=false
     var buscar=String(prompt("Digite o numero do CPF: "))
+    if(pessoas_registro==0){
+        console.log("Ficha inexistente")
+    }
         for(var i=0; i<pessoas_registro.length;i++){
             if(buscar===pessoas_registro[i].cpf){
                 console.log(` 
@@ -355,13 +379,16 @@ function busca_cpf(){
 
             }
             if(!encontrado && i===pessoas_registro.length-1){
-                console.log("Ficha não encontrada")
+                console.log("Ficha inexistente")
             }
         }
 }
 function busca_nome(){
     var encontrado=false
     var buscar=String(prompt("Digite o nome: "))
+    if(animais_resgistros.length==0){
+        console.log("Ficha inexistente")
+    }
         for(var i=0; i<pessoas_registro.length;i++){
             if(buscar===pessoas_registro[i].nome){
                 console.log(` 
@@ -389,7 +416,7 @@ function busca_nome(){
 
             }
             if(!encontrado && i===pessoas_registro.length-1){
-                console.log("Ficha não encontrada")
+                console.log("Ficha inexistente")
             }
         }
 }
@@ -415,6 +442,10 @@ function adotar_animal(){
     var aux_1=null // variaveis auxiliares para guardar o valor de i e j
     var aux_2=null
     var busca_cpf=String(prompt("Digite seu CPF"))
+    if(pessoas_registro.length==0){
+        console.log("Ficha inexistente")
+        return
+    }
     for(var i=0;i<pessoas_registro.length;i++){
         if(busca_cpf===pessoas_registro[i].cpf){
         console.log("Pessoa localizada \n"+"Nome: "+pessoas_registro[i].nome+"\n"+"CPF: "+pessoas_registro[i].cpf)
@@ -428,6 +459,10 @@ function adotar_animal(){
     }
 
     var buscar_animal_id=Number(prompt("Digite o id do animal"))
+    if(animais_resgistros.length==0){
+        console.log("Ficha inexistente")
+        return
+    }
     for(var j=0;j<animais_resgistros.length;j++){
         if(buscar_animal_id===animais_resgistros[j].id && animais_resgistros[j].situacao==="disponivel"){
             console.log("Animal encontrado \n "+"Nome:"+animais_resgistros[j].nome+"\n"+"Chip: "+animais_resgistros[j].chip)
@@ -444,6 +479,7 @@ function adotar_animal(){
             case 1:
                 pessoas_registro[aux_1].animaisAdotados.push(animais_resgistros[aux_2])
                 animais_resgistros[aux_2].situacao="adotado"
+                animais_resgistros[aux_2].dono=pessoas_registro[aux_1].nome
                 pessoas_registro[aux_1].situacao="adotante"
                 console.log("Adoção realizada com sucesso") 
                 console.log(` 
@@ -478,6 +514,10 @@ function adotar_animal(){
 }
 // funções de edição
 function remover_animais(){
+    if(animais_resgistros.length==0){
+        console.log("Não existem animais cadastrados")
+        return
+    }
     var buscar_animal=Number(prompt("digite o Id do animal a ser removido"))
     var encontrado= false
     for (var i = 0; i < animais_resgistros.length; i++) {
@@ -538,7 +578,12 @@ function remover_animais(){
 }
 function remover_pessoa(){
  var encontrado=false
+    if(pessoas_registro.length==0){
+        console.log("Não Existem Pessoas cadastradas")
+        return
+    }
     var buscar=Number(prompt("Digite o numero do ID: "))
+    
         for(var i=0; i<pessoas_registro.length;i++){
                 if(buscar===pessoas_registro[i].id){
                     console.log(`
@@ -595,7 +640,103 @@ function remover_pessoa(){
                 }       
         }        
 }
-function edicao_status_animal_disponivel(){
+function editar_animal(){
+    if(animais_resgistros.length==0){
+        console.log("Não existem animais registrados")
+        return
+    }
+    var buscar_animal=String(prompt("Digite o nome do animal"))
+    var encontrado= false
+    for (var i = 0; i < animais_resgistros.length; i++) {
+        if(buscar_animal===animais_resgistros[i].nome){
+            do{
+            var edicao_animal=Number(prompt("Quais dados deseja editar? \n 1- Nome \n 2- Chip \n 3- Peso \n 4- Idade \n 5- Sair"))
+                switch(edicao_animal){
+                    case 1:
+                        var aux=String(prompt("Digite o novo nome de " +animais_resgistros[i].nome))
+                        animais_resgistros[i].nome=aux
+                        break;
+                    case 2:
+                        var aux=String(prompt("Digite o novo chip de " +animais_resgistros[i].nome))
+                        animais_resgistros[i].chip=aux
+                        break;
+                    case 3:
+                        var aux=String(prompt("Digite o novo peso de " +animais_resgistros[i].nome))
+                        animais_resgistros[i].peso=aux
+                        break;
+                    case 4:
+                        var aux=String(prompt("Digite o nova idade de " +animais_resgistros[i].nome))
+                        animais_resgistros[i].idade=aux
+                        break;
+                    case 5:
+                        return
+                    default:
+                        alert("opção invalida")
+                        break;
+                }
+            }while(buscar_animal!=5)
+            encontrado=true
+
+        }if(!encontrado && i===animais_resgistros.length-1){
+            console.log("Ficha inexistente")
+        }
+    }   
+}
+function editar_pessoa(){
+    if(pessoas_registro.length==0){
+        console.log("Não existem pessoas registrados")
+        return
+    }
+    var buscar_pessoa=String(prompt("Digite o nome da Pessoa"))
+    var encontrado= false
+    for (var i = 0; i < pessoas_registro.length; i++) {
+        if(buscar_pessoa===pessoas_registro[i].nome){
+          do{
+            var edicao_pessoa=Number(prompt("Quais dados deseja editar? \n 1- Nome \n 2- CPF \n 3- Estado \n 4- Cidade \n 5- Rua \n 6- Cep \n 7- Sair"))
+                switch(edicao_pessoa){
+                    case 1:
+                        var aux=String(prompt("Digite o novo nome de " +pessoas_registro[i].nome))
+                        pessoas_registro[i].nome=aux
+                        break;
+                    case 2:
+                        var aux=String(prompt("Digite o novo CPF de " +pessoas_registro[i].nome))
+                        pessoas_registro[i].cpf=aux
+                        break;
+                    case 3:
+                        var aux=String(prompt("Digite o novo estado de " +pessoas_registro[i].nome))
+                        pessoas_registro[i].localizacao.estado=aux
+                        break;
+                    case 4:
+                        var aux=String(prompt("Digite o nova cidade " +pessoas_registro[i].nome))
+                        pessoas_registro[i].localizacao.cidade=aux
+                        break;
+                    case 5:
+                        var aux=String(prompt("Digite o nova rua de " +pessoas_registro[i].nome))
+                        pessoas_registro[i].localizacao.rua=aux
+                        break;
+                    case 6:
+                        var aux=String(prompt("Digite o nova rua de " +pessoas_registro[i].nome))
+                        pessoas_registro[i].localizacao.cep=aux
+                        break;
+                    case 7:
+                        return
+                    default:
+                        alert("opção invalida")
+                        break;
+                }
+            }while(edicao_pessoa!=7)
+            encontrado=true
+        }if(!encontrado && i===pessoas_registro.length-1){
+            console.log("Ficha inexistente")
+        }
+    }   
+
+}
+function edicao_status_animal(){
+    if(animais_resgistros.length==0){
+        console.log("Não existem animais cadastrados")
+        return
+    }
     var buscar_animal=Number(prompt("digite o Id do animal a ser editado"))
     var encontrado= false
     for (var i = 0; i < animais_resgistros.length; i++) {
@@ -622,6 +763,7 @@ function edicao_status_animal_disponivel(){
             ╚═══════════════════════════════════════════════════════════════════╝`) 
 
             animais_resgistros[i].status="morto"
+            animais_resgistros[i].situacao="indisponivel"
             console.log("o status do animal "+animais_resgistros[i].nome+" foi mudado para "+animais_resgistros[i].status)
             encontrado = true;
             }
@@ -691,7 +833,7 @@ function menu_inicial(){
                     }
                 break;
             case 4:
-                var menu_edicao=Number(prompt("Menu de Edições \n 1- Remover animal \n 2- Remover pessoa \n 3- Editar status de animal \n 4- Sair"))
+                var menu_edicao=Number(prompt("Menu de Edições \n 1- Remover animal \n 2- Remover pessoa \n 3- Editar status de animal \n 4- Editar animal \n 5- Editar Pessoa \n 6- Sair"))
                     switch(menu_edicao){
                         case 1:
                             remover_animais();
@@ -700,9 +842,15 @@ function menu_inicial(){
                             remover_pessoa();
                             break;
                         case 3:
-                            edicao_status_animal_disponivel();
+                            edicao_status_animal();
                             break;
                         case 4:
+                            editar_animal();
+                            break;
+                        case 5:
+                            editar_pessoa();
+                            break;
+                        case 6:
                             break;
                         default:
                             alert("Opção invalida")
