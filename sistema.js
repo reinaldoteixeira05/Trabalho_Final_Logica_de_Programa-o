@@ -223,7 +223,7 @@ function lista_animais_adotados(){
 function lista_pessoas(){
     var cont_fichas=1
     if(pessoas_registro.length==0){
-        console.log("⚠️ %cNão existem pessoas registrados","color:Red;")
+        console.log("⚠️ %cNão existem pessoas registradas","color:Red;")
         return
     }
     console.log(`%c 
@@ -293,8 +293,6 @@ function buscar_por_nome(){
         ╠═══════════════════════════════════════════════════════════════════╣
         ║`+"Peso: "+animais_resgistros[i].peso+                            `
         ╠═══════════════════════════════════════════════════════════════════╣
-        ║`+"Id: "+animais_resgistros[i].id+                                `
-        ╠═══════════════════════════════════════════════════════════════════╣
         ║`+"Especie: "+animais_resgistros[i].especie+                      `
         ╠═══════════════════════════════════════════════════════════════════╣
         ║`+"Sexo: "+animais_resgistros[i].sexo+                            `
@@ -332,8 +330,6 @@ function buscar_por_chip(){
          ╠═══════════════════════════════════════════════════════════════════╣
          ║`+"Peso: "+animais_resgistros[i].peso+                            `
          ╠═══════════════════════════════════════════════════════════════════╣
-         ║`+"Id: "+animais_resgistros[i].id+                                `
-         ╠═══════════════════════════════════════════════════════════════════╣
          ║`+"Especie: "+animais_resgistros[i].especie+                      `
          ╠═══════════════════════════════════════════════════════════════════╣
          ║`+"Sexo: "+animais_resgistros[i].sexo+                            `
@@ -355,7 +351,7 @@ function busca_cpf(){
     var encontrado=false
     var buscar=String(prompt("Digite o numero do CPF: "))
     if(pessoas_registro==0){
-        console.log("⚠️ %cNão existem pessoas registrados","color:Red;")
+        console.log("⚠️ %cNão existem pessoas registradas","color:Red;")
     }
         for(var i=0; i<pessoas_registro.length;i++){
             if(buscar===pessoas_registro[i].cpf){
@@ -392,7 +388,7 @@ function busca_nome(){
     var encontrado=false
     var buscar=String(prompt("Digite o nome: "))
     if(animais_resgistros.length==0){
-        console.log("⚠️ %cNão existem pessoas registrados","color:Red;")
+        console.log("⚠️ %cNão existem pessoas registradas","color:Red;")
     }
         for(var i=0; i<pessoas_registro.length;i++){
             if(buscar===pessoas_registro[i].nome){
@@ -448,7 +444,7 @@ function adotar_animal(){
     var aux_2=null
     var busca_cpf=String(prompt("Digite seu CPF"))
     if(pessoas_registro.length==0){
-        console.log("⚠️ %cNão existem pessoas registrados","color:Red;")
+        console.log("⚠️ %cNão existem pessoas registradas","color:Red;")
         return
     }
     for(var i=0;i<pessoas_registro.length;i++){
@@ -586,10 +582,10 @@ function remover_animais(){
     }   
 }
 function remover_pessoa(){
-    var aux_1
+    var aux_1 // guardar o valor de i para remoção
     var encontrado=false
     if(pessoas_registro.length==0){
-        console.log("⚠️ %cNão existem pessoas registrados","color:Red;")
+        console.log("⚠️ %cNão existem pessoas registradas","color:Red;")
         return
     }
     var buscar=String(prompt("Digite o numero do CPF: "))
@@ -700,7 +696,7 @@ function editar_animal(){
 }
 function editar_pessoa(){
     if(pessoas_registro.length==0){
-        console.log("⚠️ %cNão existem pessoas registrados","color:Red;")
+        console.log("⚠️ %cNão existem pessoas registradas","color:Red;")
         return
     }
     var buscar_pessoa=String(prompt("Digite o nome da Pessoa"))
@@ -763,7 +759,8 @@ function edicao_status_animal(){
     var encontrado= false
     for (var i = 0; i < animais_resgistros.length; i++) {
         if (buscar_animal === animais_resgistros[i].chip ) {
-            console.log(`
+            var cor=animais_resgistros[i].codCor
+            console.log(`%c
             ╔═══════════════════════════════════════════════════════════════════╗
             ║`+"Nome: "+animais_resgistros[i].nome+                            `
             ╠═══════════════════════════════════════════════════════════════════╣
@@ -773,8 +770,6 @@ function edicao_status_animal(){
             ╠═══════════════════════════════════════════════════════════════════╣
             ║`+"Peso: "+animais_resgistros[i].peso+                            `
             ╠═══════════════════════════════════════════════════════════════════╣
-            ║`+"Id: "+animais_resgistros[i].id+                                `
-            ╠═══════════════════════════════════════════════════════════════════╣
             ║`+"Especie: "+animais_resgistros[i].especie+                      `
             ╠═══════════════════════════════════════════════════════════════════╣
             ║`+"Sexo: "+animais_resgistros[i].sexo+                            `
@@ -782,7 +777,7 @@ function edicao_status_animal(){
             ║`+"Status: "+animais_resgistros[i].status+                        `
             ╠═══════════════════════════════════════════════════════════════════╣
             ║`+"Situação: "+animais_resgistros[i].situacao+                    `
-            ╚═══════════════════════════════════════════════════════════════════╝`) 
+            ╚═══════════════════════════════════════════════════════════════════╝`,"color:"+cores[cor]) 
         var opcao=Number(prompt("Deseja mudar o status de "+animais_resgistros[i].nome+" para morto? \n 1- Sim  \n 2- Não"))
             switch(opcao){
                 case 1:
