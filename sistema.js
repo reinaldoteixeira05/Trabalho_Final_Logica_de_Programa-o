@@ -586,7 +586,8 @@ function remover_animais(){
     }   
 }
 function remover_pessoa(){
- var encontrado=false
+    var aux_1
+    var encontrado=false
     if(pessoas_registro.length==0){
         console.log("⚠️ %cNão existem pessoas registrados","color:Red;")
         return
@@ -613,10 +614,11 @@ function remover_pessoa(){
                     ╠═══════════════════════════════════════════════════════════════════╣
                     ║`+"Id: "+pessoas_registro[i].id+                                  `
                     ╚═══════════════════════════════════════════════════════════════════╝`,"color: Blue;")
+                    aux_1=i
                     encontrado=true
                         
                 }if(!encontrado && i===pessoas_registro.length-1){
-                    alert("%c ❌ Ficha inexistente","color:Red;")
+                    console.log("%c ❌ Ficha inexistente","color:Red;")
                     return
                 }
         }
@@ -630,7 +632,7 @@ function remover_pessoa(){
             var aux=Number(prompt("Deseja remover esta pessoa? \n 1- Sim \n 2- Não "))
              switch(aux){
                 case 1:
-                    pessoas_registro[k].id += +pessoas_registro.length // essa função ira somar o id da pessoa + o tamanho da lista
+                    pessoas_registro[aux_1].id += +pessoas_registro.length // essa função ira somar o id da pessoa + o tamanho da lista
                     pessoas_registro.sort(function(a,b){    // metodo sort ira colocar o pessoa selecionado no final do array
                         if(a.id<b.id){
                             return -1;
@@ -641,7 +643,8 @@ function remover_pessoa(){
                     })
                     pessoas_registro.pop();
                     console.log("%cPessoa removida com sucesso ✔️","color:Green;")
-                    break;
+                    return
+                    
                 case 2:
                     break;
                 default:
